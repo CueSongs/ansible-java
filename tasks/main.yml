@@ -1,0 +1,13 @@
+---
+
+- name: Adding Java repository
+  apt_repository: repo='ppa:webupd8team/java' state=present
+
+- name: Set Oracle License
+  action: shell echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
+
+- name: Update apt cache
+  apt: update_cache=yes
+
+- name: Install Java
+  apt: pkg=oracle-java8-installer state=present install_recommends=yes
